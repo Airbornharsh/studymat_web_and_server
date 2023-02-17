@@ -3,7 +3,7 @@ import Authenticate from "../../../../../Server/middlewares/Authenticate";
 
 const main = async (req: any, res: any) => {
   try {
-    if (!(req.body.name || req.body.url)) {
+    if (!(body.name || body.url)) {
       return res.status(406).send({ message: "No Data Given" });
     }
 
@@ -12,7 +12,7 @@ const main = async (req: any, res: any) => {
     const AuthenticateDetail = await Authenticate(req, res);
 
     const newInstitution = new DbModels!.institution({
-      name: req.body.name,
+      name: body.name,
       users: [AuthenticateDetail?._id],
     });
 

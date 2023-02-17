@@ -7,17 +7,17 @@ const main = async (req: NextApiRequest, res: NextApiResponse) => {
     const DbModels = await DbConnect();
 
     let tempUser = await DbModels?.user.findOne({
-      userName: req.body.userName,
+      userName: body.userName,
     });
     if (tempUser) {
       return res.status(400).send({ message: "UserName Exists!" });
     }
 
-    const hashPassword = await hash(req.body.password.trim(), 10);
+    const hashPassword = await hash(body.password.trim(), 10);
 
     const newUser = new DbModels!.user({
-      name: req.body.name.trim(),
-      userName: req.body.userName.trim(),
+      name: body.name.trim(),
+      userName: body.userName.trim(),
       institution: [],
       password: hashPassword,
     });

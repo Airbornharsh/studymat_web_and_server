@@ -3,7 +3,9 @@ import Authenticate from "../../../../../Server/middlewares/Authenticate";
 
 const main = async (req: any, res: any) => {
   try {
-    if (!(req.body.name && req.body.institutionId && req.body.link)) {
+    const body = JSON.parse(req.body);
+
+    if (!(body.name && body.institutionId && body.link)) {
       return res.status(406).send({ message: "No Data Given" });
     }
 
@@ -17,26 +19,26 @@ const main = async (req: any, res: any) => {
       tempInstitution.push(e.toString());
     });
 
-    if (!AuthenticateDetail!.institution.includes(req.body.institutionId)) {
+    if (!AuthenticateDetail!.institution.includes(body.institutionId)) {
       return res
         .status(402)
         .send({ message: "Not Authorized for this Institution" });
     }
 
     const newPdf = new DbModels!.pdf({
-      institutionId: req.body.institutionId,
-      name: req.body.name,
-      link: req.body.link,
-      courses: [...(req.body.courses ? req.body.courses : [])],
-      branches: [...(req.body.branches ? req.body.branches : [])],
-      years: [...(req.body.years ? req.body.years : [])],
-      subjects: [...(req.body.subjects ? req.body.subjects : [])],
-      modules: [...(req.body.modules ? req.body.modules : [])],
+      institutionId: body.institutionId,
+      name: body.name,
+      link: body.link,
+      courses: [...(body.courses ? body.courses : [])],
+      branches: [...(body.branches ? body.branches : [])],
+      years: [...(body.years ? body.years : [])],
+      subjects: [...(body.subjects ? body.subjects : [])],
+      modules: [...(body.modules ? body.modules : [])],
     });
 
     const pdfData = await newPdf.save();
 
-    await DbModels?.institution.findByIdAndUpdate(req.body.institutionId, {
+    await DbModels?.institution.findByIdAndUpdate(body.institutionId, {
       $push: { pdfs: pdfData._id },
     });
 

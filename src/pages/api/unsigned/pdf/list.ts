@@ -4,11 +4,15 @@ import Authenticate from "../../../../../Server/middlewares/Authenticate";
 
 const main = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
+    const body = JSON.parse(req.body);
+
     const DbModels = await DbConnect();
 
     const pdfDatas = await DbModels?.pdf.find({
-      institutionId: req.body.institutionId,
+      institutionId: body.institutionId,
     });
+
+    console.log(pdfDatas, body.institutionId);
 
     res.send(pdfDatas);
   } catch (e: any) {

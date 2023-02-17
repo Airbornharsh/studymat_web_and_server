@@ -8,19 +8,19 @@ const main = async (req: NextApiRequest, res: NextApiResponse) => {
     const DbModels = await DbConnect();
 
     let tempUser;
-    if (req.body.userName) {
+    if (body.userName) {
       tempUser = await DbModels!.user.findOne({
-        userName: req.body.userName.trim(),
+        userName: body.userName.trim(),
       });
       if (!tempUser) {
         return res
           .status(400)
-          .send({ message: `No Such ${req.body.userName} Exist` });
+          .send({ message: `No Such ${body.userName} Exist` });
       }
     }
 
     const passwordSame = await compare(
-      req.body.password.trim(),
+      body.password.trim(),
       tempUser.password.trim()
     );
 

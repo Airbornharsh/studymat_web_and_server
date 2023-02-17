@@ -4,13 +4,15 @@ import Authenticate from "../../../../../Server/middlewares/Authenticate";
 
 const main = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
+    const body = JSON.parse(req.body);
+
     const DbModels = await DbConnect();
 
     const page = req.query.page ? parseInt(req.query.page as string) : 1;
     const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
 
     let institutionDatas = await DbModels?.institution
-      .find({ name: { $regex: req.body.name } })
+      .find({ name: { $regex: body.name } })
       .skip((page - 1) * limit)
       .limit(limit);
 
