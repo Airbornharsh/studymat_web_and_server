@@ -6,7 +6,7 @@ const institutionSchema = new Schema({
     required: true,
   },
   users: [{ type: Schema.Types.ObjectId, ref: "User", default: [] }],
-  pdfMats: [{ type: Schema.Types.ObjectId, ref: "PdfMat", default: [] }],
+  pdfs: [{ type: Schema.Types.ObjectId, ref: "Pdf", default: [] }],
   videos: [{ type: Schema.Types.ObjectId, ref: "Video", default: [] }],
   playlists: [{ type: Schema.Types.ObjectId, ref: "Playlist", default: [] }],
 });

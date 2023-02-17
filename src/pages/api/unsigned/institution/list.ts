@@ -18,7 +18,7 @@ const main = async (req: NextApiRequest, res: NextApiResponse) => {
       return {
         _id: i._id,
         name: i.name,
-        pdfMats: i.pdfMats.length,
+        pdfs: i.pdfs.length,
         videos: i.videos.length,
         playlists: i.playlists.length,
       };

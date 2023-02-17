@@ -1,6 +1,6 @@
 import { Schema, models, model } from "mongoose";
 
-const pdfMatSchema = new Schema({
+const pdfSchema = new Schema({
   institution: {
     type: String,
     default: "",
@@ -25,4 +25,4 @@ const pdfMatSchema = new Schema({
   },
 });
 
-export default models.PdfMat || model("PdfMat", pdfMatSchema);
+export default models.Pdf || model("Pdf", pdfSchema);

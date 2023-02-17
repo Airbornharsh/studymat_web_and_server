@@ -1,7 +1,7 @@
 import mongoose, { mongo } from "mongoose";
 import user from "../models/user";
 import institution from "../models/institution";
-import pdfMat from "../models/pdfMat";
+import pdf from "../models/pdf";
 import video from "../models/video";
 import playlist from "../models/playlist";
 
@@ -19,7 +19,7 @@ export const DbConnect = async () => {
       connect,
       user,
       institution,
-      pdfMat,
+      pdf,
       video,
       playlist,
     };
