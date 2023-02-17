@@ -22,9 +22,9 @@ const main = async (req: any, res: any) => {
       $push: { institution: institutionData._id },
     });
 
-    res.send(institutionData);
+    return res.send(institutionData);
   } catch (e: any) {
-    res.status(500).send(e.message);
+    return res.status(500).send({ message: e.message });
   }
 };
 

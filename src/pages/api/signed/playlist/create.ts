@@ -23,7 +23,7 @@ const main = async (req: any, res: any) => {
         .send({ message: "Not Authorized for this Institution" });
     }
 
-    const newVideo = new DbModels!.video({
+    const newPlaylist = new DbModels!.playlist({
       institutionId: req.body.institutionId,
       name: req.body.name,
       link: req.body.link,
@@ -34,15 +34,15 @@ const main = async (req: any, res: any) => {
       modules: [...(req.body.modules ? req.body.modules : [])],
     });
 
-    const videoData = await newVideo.save();
+    const PlaylistData = await newPlaylist.save();
 
     await DbModels?.institution.findByIdAndUpdate(AuthenticateDetail?._id, {
-      $push: { playlists: videoData._id },
+      $push: { playlists: PlaylistData._id },
     });
 
-    res.send(videoData);
+    return res.send(PlaylistData);
   } catch (e: any) {
-    res.status(500).send(e.message);
+    return res.status(500).send({ message: e.message });
   }
 };
 

@@ -40,9 +40,9 @@ const main = async (req: any, res: any) => {
       $push: { pdfs: pdfData._id },
     });
 
-    res.send(pdfData);
+    return res.send(pdfData);
   } catch (e: any) {
-    res.status(500).send(e.message);
+    return res.status(500).send({ message: e.message });
   }
 };
 

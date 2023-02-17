@@ -34,7 +34,7 @@ const Authenticate = async (req: NextApiRequest, res: NextApiResponse) => {
       institution: userData.institution,
     };
   } catch (e: any) {
-    return res.status(500).send(e.message);
+    return res.status(500).send({ message: e.message });
   }
 };
 
