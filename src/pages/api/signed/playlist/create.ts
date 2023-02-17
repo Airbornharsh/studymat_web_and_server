@@ -36,7 +36,7 @@ const main = async (req: any, res: any) => {
 
     const PlaylistData = await newPlaylist.save();
 
-    await DbModels?.institution.findByIdAndUpdate(AuthenticateDetail?._id, {
+    await DbModels?.institution.findByIdAndUpdate(req.body.institutionId, {
       $push: { playlists: PlaylistData._id },
     });
 

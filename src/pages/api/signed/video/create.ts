@@ -36,8 +36,8 @@ const main = async (req: any, res: any) => {
 
     const videoData = await newVideo.save();
 
-    await DbModels?.institution.findByIdAndUpdate(AuthenticateDetail?._id, {
-      $push: { playlists: videoData._id },
+    await DbModels?.institution.findByIdAndUpdate(req.body.institutionId, {
+      $push: { videos: videoData._id },
     });
 
     return res.send(videoData);
