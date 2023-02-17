@@ -1,8 +1,9 @@
 import { Secret, verify } from "jsonwebtoken";
+import { NextApiRequest, NextApiResponse } from "next";
 
-const Authenticate = async (req: any, res: any) => {
+const Authenticate = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const accessToken = req.headers["authorization"].split(" ")[1];
+    const accessToken = req.headers["authorization"]?.split(" ")[1] as string || "";
 
     let tempErr: any;
     let tempUser: any;
