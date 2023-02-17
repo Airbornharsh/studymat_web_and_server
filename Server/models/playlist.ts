@@ -1,17 +1,13 @@
 import { Schema, models, model } from "mongoose";
 
 const playlistSchema = new Schema({
-  institution: {
-    type: String,
-    default: "",
-  },
   institutionId: {
     type: Schema.Types.ObjectId,
     ref: "Institution",
     required: true,
   },
   courses: [{ type: String, default: [] }],
-  branchs: [{ type: String, default: [] }],
+  branches: [{ type: String, default: [] }],
   years: [{ type: String, default: [] }],
   subjects: [{ type: String, default: [] }],
   modules: [{ type: String, default: [] }],

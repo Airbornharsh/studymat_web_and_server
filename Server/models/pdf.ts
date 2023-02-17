@@ -15,7 +15,7 @@ const pdfSchema = new Schema({
     required: true,
   },
   courses: [{ type: String, default: [] }],
-  branchs: [{ type: String, default: [] }],
+  branches: [{ type: String, default: [] }],
   years: [{ type: String, default: [] }],
   subjects: [{ type: String, default: [] }],
   modules: [{ type: String, default: [] }],
