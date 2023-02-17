@@ -1,7 +1,8 @@
 import { hash } from "bcrypt";
+import { NextApiRequest, NextApiResponse } from "next";
 import { DbConnect } from "../../../../Server/config/Db_config";
 
-const main = async (req: any, res: any) => {
+const main = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const DbModels = await DbConnect();
 
@@ -26,7 +27,7 @@ const main = async (req: any, res: any) => {
     return res.send(data);
   } catch (e: any) {
     console.log(e);
-    res.status(500).send(e.message);
+    res.status(500).send({ message: e.message });
   }
 };
 
