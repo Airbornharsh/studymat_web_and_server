@@ -1,12 +1,16 @@
 import { Secret, verify } from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
+import { DbConnect } from "Server/config/Db_config";
 
 const Authenticate = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const accessToken = req.headers["authorization"]?.split(" ")[1] as string || "";
+    const accessToken =
+      (req.headers["authorization"]?.split(" ")[1] as string) || "";
 
     let tempErr: any;
     let tempUser: any;
+
+    const DbModels = await DbConnect();
 
     await verify(
       accessToken,
@@ -17,12 +21,17 @@ const Authenticate = async (req: NextApiRequest, res: NextApiResponse) => {
       }
     );
 
-    if (tempErr) return res.status(402).send({ message: "Not Authorized" });
+    const userData = await DbModels!.user.findById(tempUser._id);
+
+    if (tempErr && userData.isAdmin)
+      return res.status(402).send({ message: "Not Authorized" });
 
     return {
-      userName: tempUser.userName,
-      _id: tempUser._id,
-      iat: tempUser.iat,
+      userName: userData.userName,
+      isAdmin: userData.isAdmin,
+      _id: userData._id,
+      iat: userData.iat,
+      institution: userData.institution,
     };
   } catch (e: any) {
     return res.status(500).send(e.message);

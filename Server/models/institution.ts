@@ -5,6 +5,10 @@ const institutionSchema = new Schema({
     type: String,
     required: true,
   },
+  photoLink: {
+    type: String,
+    default: "",
+  },
   users: [{ type: Schema.Types.ObjectId, ref: "User", default: [] }],
   pdfs: [{ type: Schema.Types.ObjectId, ref: "Pdf", default: [] }],
   videos: [{ type: Schema.Types.ObjectId, ref: "Video", default: [] }],
