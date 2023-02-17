@@ -14,6 +14,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  isAdmin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   institution: [
     { type: Schema.Types.ObjectId, ref: "Institution", default: [] },
   ],

@@ -1,7 +1,7 @@
 import { compare } from "bcrypt";
 import { Secret, sign } from "jsonwebtoken";
 import { NextApiRequest, NextApiResponse } from "next";
-import { DbConnect } from "Server/config/Db_config";
+import { DbConnect } from "../../../../Server/config/Db_config";
 
 const main = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
