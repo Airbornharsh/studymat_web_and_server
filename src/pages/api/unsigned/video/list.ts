@@ -7,11 +7,11 @@ const main = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const DbModels = await DbConnect();
 
-    const pdfDatas = await DbModels?.pdf.find({
+    const videoDatas = await DbModels?.video.find({
       institutionId: body.institutionId,
     });
 
-    res.send(pdfDatas);
+    res.send(videoDatas);
   } catch (e: any) {
     res.status(500).send({ message: e.message });
   }
