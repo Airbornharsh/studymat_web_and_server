@@ -11,8 +11,10 @@ const main = async (req: NextApiRequest, res: NextApiResponse) => {
     const page = req.query.page ? parseInt(req.query.page as string) : 1;
     const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
 
+    console.log(body.name);
+
     let institutionDatas = await DbModels?.institution
-      .find({ name: { $regex: body.name } })
+      .find({ name: { $regex: body.name as string } })
       .skip((page - 1) * limit)
       .limit(limit);
 
