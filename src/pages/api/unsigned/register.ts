@@ -4,6 +4,8 @@ import { DbConnect } from "../../../../Server/config/Db_config";
 
 const main = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
+    const body = JSON.parse(req.body);
+
     const DbModels = await DbConnect();
 
     let tempUser = await DbModels?.user.findOne({
