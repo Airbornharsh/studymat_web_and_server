@@ -11,8 +11,19 @@ const main = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!AuthenticateDetail?.isAdmin) {
       return res.status(402).send("Not Authorized");
     }
-    const institutionDatas = await DbModels?.institution.find({
+    let institutionDatas = await DbModels?.institution.find({
       _id: AuthenticateDetail?.institution || [],
+    });
+
+    institutionDatas = institutionDatas?.map((i) => {
+      return {
+        _id: i._id,
+        name: i.name,
+        photoLink: i.photoLink,
+        pdfs: i.pdfs.length,
+        videos: i.videos.length,
+        playlists: i.playlists.length,
+      };
     });
 
     res.send(institutionDatas);
